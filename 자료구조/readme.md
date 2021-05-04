@@ -218,25 +218,24 @@ Stack 은 사전적 정의로는 쌓다 라는 뜻이 있다.
 
 ### (증명)
 
-주어진 데이터가 $$n$$ 개일 때 1/2 씩 줄어들고 최악의 경우 1개가 남을 때까지 이 작업을 반복한다면 아래와 같은 수열을 만들 수 있다.
-$$
-n:1, n/2:2, n/4:3, ... , 1:x
-$$
-여기서 연산의 횟수를 $$x$$ 라고 하면,  $$n$$ 이 1일 경우 $$x$$ 의 값은 어떻게 될까.
-$$n$$을 $$x$$번 2로 나누면 1이 된다. 를 식으로 나타내면
-$$
-n/2^x=1
-$$
-이 나오고,
-$$
-n=1*2^x
-$$
+주어진 데이터가 n 개일 때 1/2 씩 줄어들고 최악의 경우 1개가 남을 때까지 이 작업을 반복한다면 아래와 같은 수열을 만들 수 있다.
 
-이 수식 양 변에 $$log_{2}$$ 를 취해주면
-$$
-log_{2}n=x
-$$
-우리가 원하는 $$log n$$ 이 나온다.
+<p align="center"><img src="https://user-images.githubusercontent.com/71371075/117009990-4d786e00-ad27-11eb-9b0f-464bdc60041d.gif"></p>
+
+여기서 연산의 횟수를 x 라고 하면,  n 이 1일 경우 x 의 값은 어떻게 될까.
+n을 x번 2로 나누면 1이 된다. 를 식으로 나타내면
+
+<p align="center"><img src="https://user-images.githubusercontent.com/71371075/117010476-cd9ed380-ad27-11eb-9a98-cd7803c4dc9c.gif"></p>
+
+이 나오고,
+
+<p align="center"><img src="https://user-images.githubusercontent.com/71371075/117010718-076fda00-ad28-11eb-8169-0431c76b869c.gif"></p>
+
+이 수식 양 변에 ![log2](https://user-images.githubusercontent.com/71371075/117011145-806f3180-ad28-11eb-8350-aeb0c4dfe043.gif) 를 취해주면
+
+<p align="center"><img src="https://user-images.githubusercontent.com/71371075/117010807-253d3f00-ad28-11eb-83a0-c857a018d96f.gif"></p>
+
+우리가 원하는 ![logn](https://user-images.githubusercontent.com/71371075/117010979-54ec4700-ad28-11eb-9114-61951281cecc.gif) 이 나온다.
 
 ### 삭제
 
