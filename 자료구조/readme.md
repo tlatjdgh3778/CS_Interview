@@ -246,3 +246,7 @@ n을 x번 2로 나누면 1이 된다. 를 식으로 나타내면
 <p align="center"><img src="https://runestone.academy/runestone/books/published/pythonds/_images/percDown.png"></p>
 
 삽입과 삭제 연산 그 자체만으로는 **O(1)** 의 시간복잡도를 가지지만 그 후 정렬을 하기 때문에 둘 다 **O(logn)** 의 시간복잡도를 가지게 된다.
+
+
+* [자료구조 2편 보기](./자료구조/자료구조(2)/readme.md)
+* [자료구조 3편 보기](./자료구조/자료구조(3)/readme.md)
