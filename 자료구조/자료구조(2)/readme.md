@@ -171,14 +171,111 @@ Linked List 를 사용하는 충돌 처리 방식이다.
 큐를 사용하여 구현한다.
 
 ### 8. 트리(Tree)
-<p align="center"><img src="https://gmlwjd9405.github.io/images/data-structure-tree/tree-terms.png" width="70%"></p>
+트리는 그래프의 일종으로 여러 노드가 한 노드를 가리킬 수 없는 구조이다. 
+
+<p align="center"><img src="https://gmlwjd9405.github.io/images/data-structure-tree/tree-terms.png" width="70%"><br><a href="https://gmlwjd9405.github.io/2018/08/12/data-structure-tree.html">https://gmlwjd9405.github.io/2018/08/12/data-structure-tree.html</a></p>
+
+**루트 노드(Root Node)** : 트리 구조에서 최상위에 존재하는 A 와 같은 노드
+**노드(Node)** : 트리의 구성요소에 해당하는 A,B,C,D,E,F,G,H,I,J 와 같은 요소
+**간선(Edge)** : 노드와 노드를 연결하는 연결선
+**말단 노드(Leaf Node)** : 제일 하단에 있는 H,I,J,F,G 와 같은 노드
+**Sub-Tree** : 전체 트리안에 속하는 작은 트리
+**레벨(Level)** : 트리의 특정 깊이를 가지는 노드의 집합
+**형제(Siblings)** : 같은 부모를 가진 노드
+**깊이(depth)** : 루트에서부터 어떤 노드에 도달하기 위해 거쳐야 할 간선의 수
+**높이(height)** : 루트 노드에서 가장 깊숙히 있는 노드의 깊이(3)
 
 #### 7-1. 이진 트리(Binary Tree)
-  	순회
+이진 트리는 각각의 노드가 최대 두 개의 자식 노드를 가지는 트리 자료구조이다. 자식 노드를 각각 왼쪽 자식 노드와 오른쪽 자식 노드라고 한다.
+
+<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Binary_tree.svg/1024px-Binary_tree.svg.png" width="70%"><br><a href="https://ko.wikipedia.org/wiki/%EC%9D%B4%EC%A7%84_%ED%8A%B8%EB%A6%AC">https://ko.wikipedia.org/wiki/%EC%9D%B4%EC%A7%84_%ED%8A%B8%EB%A6%AC</a></p>
+
 #### 7-2. 완전 이진 트리(Complete Binary Tree)
+완전 이진 트리란 루트부터 노드가 채워져있으면서 같은 레벨에서는 왼쪽에서 오른쪽으로 노드가 채워져있는 이진트리이다.
+
+<p align="center"><img src="https://gmlwjd9405.github.io/images/data-structure-tree/Complete-Binary-Tree.png"><br><a href="https://gmlwjd9405.github.io/2018/08/12/data-structure-tree.html">https://gmlwjd9405.github.io/2018/08/12/data-structure-tree.html</a></p>
+
+첫 번째 그림은 노드가 왼쪽부터 채워지지 않았기 때문에 완전 이진 트리가 아니다.
+
 #### 7-3. 정 이진 트리(Full Binary Tree)
+정 이진 트리는 모든 노드가 0개 혹은 2개의 자식 노드를 가지는 트리를 말한다.
+
+<p align="center"><img src="https://gmlwjd9405.github.io/images/data-structure-tree/Full-Binary-Tree.png"><br><a href="https://gmlwjd9405.github.io/2018/08/12/data-structure-tree.html">https://gmlwjd9405.github.io/2018/08/12/data-structure-tree.html</a></p>
+
 #### 7-4. 포화 이진 트리(Perfect Binary Tree)
-#### 7-5. 이진 검색 트리(Binary Search Tree(BST))
-#### 7-6. 레드-블랙 트리(Red-Black Tree)
-#### 7-7. B 트리(B-Tree)
-### 9. 트라이(Trie)
+포화 이진 트리는 모든 레벨이 꽉 찬 이진 트리를 말한다. Leaf Node 가 아닌 내부 노드들은 모두 2개의 자식을 가진다.
+
+<p align="center"><img src="https://gmlwjd9405.github.io/images/data-structure-tree/Perfect-Binary-Tree.png"><br><a href="https://gmlwjd9405.github.io/2018/08/12/data-structure-tree.html">https://gmlwjd9405.github.io/2018/08/12/data-structure-tree.html</a></p>
+
+높이가 h인 경우 최대 노드 수는 2^(h+1)-1 이다.
+
+#### 7-5. 이진 탐색 트리(Binary Search Tree(BST))
+이진 탐색 트리는 왼쪽 자식 노드가 부모 노드보다 작고, 오른쪽 자식 노드는 부모 노드보다 큰 트리 구조로 이진 트리 기반의 탐색을 위한 자료구조 이다.
+이진 탐색 트리에서 왼쪽과 오른쪽 서브 트리도 이진 탐색 트리이다.
+
+<p align="center"><img src="https://t1.daumcdn.net/cfile/tistory/9914504D5A576EA60B"><br><a href="https://eremo2002.tistory.com/24">https://eremo2002.tistory.com/24</a></p>
+
+**탐색**
+위의 그림에서 4를 탐색하고 싶다면 우선 루트 노드 6과 4를 비교했을 때 4는 6의 왼쪽 서브 트리에 존재하기 때문에 오른쪽 서브 트리는 탐색할 필요가 없다.
+다음으로는 왼쪽 서브 트리의 루트 노드인 2와 4를 비교하면 4가 더 크기 때문에 오른쪽 서브 트리로 내려간다. 
+
+이진 탐색 트리에서 탐색은 평균적으로는 **O(logN)** 의 시간복잡도를 가진다.
+
+**삽입**
+위의 트리에 5를 삽입해보자.
+
+<p align="center"><img src="https://t1.daumcdn.net/cfile/tistory/99E372395A5774A82E"><br><a href="https://eremo2002.tistory.com/24">https://eremo2002.tistory.com/24</a></p>
+
+이진 탐색 트리의 삽입은 탐색을 통해 이루어지기 때문에 탐색과 마찬가지로 **O(logN)**  의 시간복잡도를 가진다. 삽입은 항상 Leaf Node 에서 이루어진다.
+
+**삭제**
+삭제 연산은 해당하는 노드를 탐색한 뒤 해당 노드를 삭제하고 이진 탐색 트리의 구조에 맞게 트리 구조를 조정하는 과정을 거친다.
+
+삭제도 마찬가지로 **O(logN)** 의 시간복잡도를 가진다.
+
+삭제 연산에는 3가지 케이스가 있다.
+
+**1.자식 노드가 없는 노드(Leaf Node)를 삭제하는 경우**
+
+해당 노드를 단순히 삭제한다.
+
+<p align="center"><img src="https://t1.daumcdn.net/cfile/tistory/994FD3495A5777102D"><br><a href="https://eremo2002.tistory.com/24">https://eremo2002.tistory.com/24</a></p>
+
+**2.자식 노드가 1개인 노드를 삭제하는 경우**
+
+해당 노드를 삭제하고 그 위치에 해당 노드의 자식 노드를 대입한다.
+
+<p align="center"><img src="https://t1.daumcdn.net/cfile/tistory/99BE0D4A5A577A8533"><br><a href="https://eremo2002.tistory.com/24">https://eremo2002.tistory.com/24</a></p>
+
+**3.자식 노드가 2개인 노드를 삭제하는 경우**
+
+삭제하고자 하는 노드의 값을 해당 노드의 왼쪽 서브 트리에서 가장 큰 값으로 변경하거나, 오른쪽 서브 트리에서 가장 작은 값으로 변경한다.
+그 다음 해당 노드를 삭제한다.
+
+9를 삭제하는 경우를 보자.
+
+<p align="center"><img src="https://t1.daumcdn.net/cfile/tistory/99E754485A577D1028"></p>
+
+
+<p align="center"><img src="https://t1.daumcdn.net/cfile/tistory/990FEA4B5A577DB215"></p>
+
+다음은 왼쪽 서브 트리의 가장 큰 값(8) 또는 오른쪽 서브 트리의 가장 작은 값(10) 중 8을 선택할 경우이다.
+
+<p align="center"><img src="https://t1.daumcdn.net/cfile/tistory/995DD5465A57800824"></p>
+
+8은 자식 노드가 존재하지 않기 때문에 9의 위치에 8을 위치시키고 기존 8의 위치에 있던 노드는 삭제한다.
+
+만약 10을 선택할 경우는 어떻게 될까
+
+<p align="center"><img src="https://t1.daumcdn.net/cfile/tistory/99E08E465A5780D63D"><br><a href="https://eremo2002.tistory.com/24">https://eremo2002.tistory.com/24</a></p>
+
+9의 위치에 10을 위치시키고 10이 있던 노드는 10의 자식노드가 위치하게 된다.
+
+**이진 탐색 트리의 문제점 **
+이진 탐색 트리의 탐색, 삽입, 삭제 연산은 평균적으로는 **O(logN)** 의 시간복잡도를 가지지만 만약에 다음과 같은 구조의 이진 탐색 트리라면 어떻게 될까
+
+<p align="center"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FqfS0x%2FbtquJuRynUr%2F1cfdCkhiCCl4DVR81VxImk%2Fimg.png" width="50%" height="50%"><br><a href="https://navigator-ymin.tistory.com/2">https://navigator-ymin.tistory.com/2</a></p>
+
+최악의 경우 모든 노드를 탐색해야 하기 때문에 **O(n)** 의 시간복잡도를 가진다.
+
+이러한 문제를 해역하기 위해 **자가 균형 이진 탐색 트리**를 사용한다.
