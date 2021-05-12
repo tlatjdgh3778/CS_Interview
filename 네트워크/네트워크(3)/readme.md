@@ -89,10 +89,72 @@ Interface는 사물 간 또는 사물과 인간 간의 의사소통이 가능하
 소프트웨어와 소프트웨어 사이에도 수 많은 정보 요청과 교환이 일어나는데 이들 사이에서도 리모컨처럼 소프트웨어들 간의 소통할 수 있는 창구가 필요하다. 즉 API는 사람을 위한 인터페이스가 아니라 **프로그램을 위한 인터페이스**라는 것이다.
 
 ### 7-2. REST API
-REST 란 REpresentational State Transfer 의 약자로 웹에 존재하는 모든 자원(이미지, 동영상, DB 자원)에 고유한 URI를 부여해 활용”하는 것으로, 자원을 정의하고 자원에 대한 주소를 지정하는 방법론을 의미한다고 한다.
+**REST** 란 REpresentational State Transfer 의 약자로 웹에 존재하는 모든 자원(이미지, 동영상, DB 자원)에 고유한 URI를 부여해 활용”하는 것으로, 자원을 정의하고 자원에 대한 주소를 지정하는 방법론을 의미한다고 한다.
 
 더 구체적으로는 **HTTP URI을 통해 자원을 명시하고, HTTP Method(POST, GET, DELETE, PUT)를 통해 해당 자원에 대한 CRUD(CREATE, READ, UPDATE, DELETE) 오퍼레이션을 적용하는 것**이라고 한다.
+
+#### REST 아키텍처의 원칙
+
+* **클라이언트-서버 구조(Client-Server)** 
+  * 클라이언트 구현과 서버 구현은 서로에 독립적으로 수행된다.
+  * 클라이언트 측의 코드는 서버에 영향을 주지 않고 언제든지 변경할 수 있으며 그 반대도 마찬가지이다. 따라서 서로 간의 의존성이 줄어들게 된다.
+  
+* **무상태성(Stateless)**
+  * 요청 간 클라이언트의 콘텍스트가 서버에 저장되어서는 안 된다.
+    * 즉 세션과 쿠키 같은 context 정보를 신경쓰지 않아도 되므로 구현이 단순해진다.
+  * 서버는 각각의 요청을 완전히 별개의 것으로 인식하고 처리한다.
+    * 각 API 서버는 클라이언트의 요청만을 단순 처리한다.
+    * 이전 요청이 다음 요청의 처리에 연관되어서는 안 된다.
+    
+* **캐싱 가능(Cacheable)**
+  * REST는 HTTP 표준을 기반으로 만들어졌기 때문에 HTTP의 특징인 캐싱을 사용할 수 있다.
+    * 잘 관리되는 캐싱은 클라이언트-서버 간 상호작용을 부분적으로 또는 완전하게 제거하여 확장성과 성능을 향상시킨다.
+    
+* **균등한 인터페이스(Uniform Interface)**
+  * Uniform Interface는 URI로 지정한 리소스에 대한 조작을 통일되고 한정적인 인터페이스로 수행하는 아키텍처 스타일을 말한다. 즉, 통일된 Interface를 통해 어떠한 기술(Python, PHP, C#, Ruby, Java)이든 플랫폼(iOS, Android, Mac, Windows)이든 상관없이 사용할 수 있다.
+  
+* **계층형 구조(Layered System)**
+  * 클라이언트는 계층형 구조가 불가능하지만 REST 서버는 로드 밸런싱 기능이나 공유 캐시 기능을 제공함으로써 시스템 규모 확장성을 향상시킬수 있다.
+  
+* **Code on Demand(optional)**
+  * 서버에서 코드를 클라이언트로 보내서 실행할 수 있어야 한다.
+    *  평소에는 정적인 데이터를 xml 또는 json에 담아서 클라이언트로 보내고 클라이언트가 이것을 가공한다.
+    * 하지만 code on demand 라는 것은 클라이언트에 보내는 데이터를 바로 실행 가능한 코드로 보내서 이것을 클라이언트에서 실행하는 것을 말한다.
+
+**Uniform Interface 의 4가지 제약 사항**
+
+* Identification of resources
+  * 리소스가 URI로 식별된다.
+* Manipulation of resources through representations
+  * 리소스를 삭제하거나 수정할 때 HTTP 메시지에 이러한 표현을 담아서 전송해야한다.
+* Self-descriptive Messages
+  * 서버와 클라이언트 사이에서 주고 받는 메시지는 스스로를 설명해야한다는 의미이다.
+  * 메시지만 보고도 어떤 기능을 수행하는지 알 수 있어야 한다는 것이다.
+  
+```
+GET / HTTP/1.1
+```
+_이런 호출은 목적지가 없기 때문에 Self-descriptive 하지않다._
+
+```
+Get / HTTP/1.1
+Host: www.example.org
+```
+_이렇게 목적지를 추가하면 Self-descriptive 하다 라고 말할 수 있다._
+
+* Hypermedia As The Engine Of Application State(HATEOAS)
+  * 애플리케이션의 상태는 하이퍼미디어에 의해 변경된다는 것이다. 따라서 서버는 하이퍼미디어를 통해 다음 액션에 대한 선택지를 클라이언트에게 제공해야 한다.
+  
+  
+  
+아직 공부가 부족해서 이 정도까지만 정리하고 다음에 REST API 만 따로 정리해서 포스팅 해야겠다.
+
+REST API에 대한 더 자세한 내용은 밑의 링크를 참고
+
 ## 참고
 * http://tcpschool.com/webbasic/works
+* https://senticoding.tistory.com/87
 * [REST API가 뭔가요?](https://www.youtube.com/watch?v=OpoVuwxGRDI)
 * [그런 REST API로 괜찮은가](https://www.youtube.com/watch?v=RP_f5dMoHFc)
+* https://sabarada.tistory.com/26
+* [REST 위키](https://ko.wikipedia.org/wiki/REST)
