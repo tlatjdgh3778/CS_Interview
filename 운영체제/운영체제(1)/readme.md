@@ -85,13 +85,21 @@
 이 두가지는 동시에 여러 작업을 수행한다는 점을 동일하지만 적용해야 하는 시스템에 따라 멀티 프로세스와 멀티 스레드를 잘 선택해야 한다.
 
 # 3. Context Switching
+Context Switching 이란 하나의 프로세스가 CPU를 사용중인 상태에서 다른 프로세스가 CPU를 사용하도록 하기 위해, 이전의 프로세스의 상태를 보관하고 새로운 프로세스의 상태를 적재하는 작업을 말한다. 한 프로세스의 문맥(상태)은 프로세스 제어 블록(PCB)에 기록되어 있다.
 
-# 3. 스케줄러
-# 4. cpu 스케줄러
-# 5. 동기와 비동기
-# 6. 프로세스 동기화
+<p align="center"><img src="https://s3.ap-south-1.amazonaws.com/afteracademy-server-uploads/what-is-context-switching-in-operating-system-context-switching-flow.png"></p>
+
+P1 -> P2, P2 -> P1 의 Context Switching 과정은 다음과 같다.
+
+1. P1의 실행 중에 Interrupt 또는 System call 이 발생하면 P1은 idle 상태가 된다.
+2. P1이 executing 상태에서 idle 상태로 변할 때 프로세스와 실행에 대한 데이터는 레지스터에 존재하는데 이 데이터를 메모리에 저장한다.(save state into PCB1)
+3. 그 다음 P2가 실행되는데 P2가 실행되기 위해서 메모리에 존재하는 P2에 대한 데이터를 레지스터에 올려야 한다.(reload state from PCB2)
+4. P2가 실행되었다가 다시 idle 상태로 변경되면서 자신의 데이터를 메모리에 저장한다.(save state into PCB2)
+5. 다음에 P1이 실행되는데 P1의 데이터를 메모리에 저장했었다. 이 데이터를 읽어서 레지스터에 올리고 P1을 이전에 멈추었던 시점에서 이어서 실행한다.
+
 # 참고
 * https://ko.wikipedia.org/wiki/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4
 * https://ko.wikipedia.org/wiki/%EC%8A%A4%EB%A0%88%EB%93%9C_(%EC%BB%B4%ED%93%A8%ED%8C%85)
 * https://gmlwjd9405.github.io/2018/09/14/process-vs-thread.html
 * https://doorbw.tistory.com/26
+* https://afteracademy.com/blog/what-is-context-switching-in-operating-system
