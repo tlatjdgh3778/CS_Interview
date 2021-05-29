@@ -4,9 +4,15 @@
 # 1. 인덱스
 인덱스(index)란 데이터베이스에서 테이블에 대한 동작의 속도를 높여주는 자료 구조를 일컫는다. 인덱스는 말 그대로 책의 맨 처음 또는 마지막에 있는 색인이라고 할 수 있다. 책에서 원하는 내용을 찾을 때 색인을 이용해서 찾으면 더욱 쉽게 찾을 수가 있다.
 
-이처럼 데이터베이스에서도 테이블의 모든 데이터를 검색하면 시간이 올래 걸리기 때문에 칼럼과 해당 레코드가 저장된 주소를 키/값 쌍으로 인덱스를 만들어 두는 것이다.
+이처럼 데이터베이스에서도 테이블의 모든 데이터를 검색하면 시간이 오래 걸리기 때문에 칼럼과 해당 레코드가 저장된 주소를 키/값 쌍으로 인덱스를 만들어 두는 것이다.
 
-<p align="center"><img src="https://chartio.com/assets/2f455c/tutorials/database-indexing/569d22eeb4dbb4255daba9994ea4664251640a59cc99ade7cdb1c37691d6c99c/indexed-table.png"></p>
+자주 사용되는 컬럼에 대해 index 테이블을 따로 만들어 SELECT 문이 들어왔을 때 index 테이블에 있는 값들로 결과 값을 조회해 온다. index를 잘 활용 한다면 검색 연산을 실행했을 때 성능을 올릴 수 있게 된다.
+
+<p align="center"><img src="https://github.com/WeareSoft/tech-interview/raw/master/contents/images/db-index.png"></p>
+
+* index 테이블에서 where 절에 포함된 값을 검색
+* 해당 값의 table_id PK를 획득
+* 가져온 table_id PK 값으로 원본 테이블에서 값을 조회
 
 ## 1-1. 인덱스의 장점과 단점
 **장점**
@@ -130,10 +136,49 @@ BCNF 정규형은 제3 정규형을 만족하고, 모든 결정자가 후보키�
 트랜잭션(Transaction)은 작업의 완전성을 보장해주는 것이다. 논리적인 작업 셋을 모두 완벽하게 처리하거나 또는 처리하지 못할 경우에는 원래의 상태로 복구해서 작업의 일부만 적용되는 현상이 발생하지 않게 만들어주느 기능이다.
 
 사용자의 입장에서는 작업의 논리적 단위로 이해를 할 수 있고 시스템의 입장에서는 데이터들을 접근 또는 변경하는 프로그램 단위가 된다.
-# 4. 교착상태
-# 5. RDBMS와 NoSQL
+
+## 3-1. 트랜잭션의 특징
+ACID(Atomicity, Consistency, Isolation, Durability)는 트랜잭션이 안전하게 수행된다는 것을 보장하기 위한 특징을 가리키는 약어이다.
+
+ * **원자성(Atomicity)**
+   * 트랜잭션의 연산은 데이터베이스에 모두 반영되거나 아니면 전혀 반영되지 않아야 한다.(All or Nothing)
+ * **일관성(Consistency)**
+   * 트랜잭션이 성공적으로 완료되면 일관적인 DB상태를 유지하는 것을 말한다.
+   * 트랜잭션이 완료된 다음의 상태에서도 트랜잭션이 일어나기 전의 상황과 동일하게 데이터의 일관성을 보장해야 하는 것을 말한다.
+ * **고립성(Isolation)**
+   * 트랜잭션 수행 시 다른 트랜잭션의 연산 작업이 끼어들지 못하도록 보장하는 것을 말한다.
+   * 수행중인 트랜잭션은 완전히 완료될 때까지 다른 트랜잭션에서 수행 결과를 참조할 수 없다.
+ * **지속성, 영속성(Durability)**
+   * 성공적으로 수행된 트랜잭션은 영원히 반영되어야 함을 의미한다.
+   * 시스템 문제, DB 일관성 체크 등을 하더라도 유지되어야 한다.
+
+## 3-2. 트랜잭션의 연산과 상태
+### Commit 연산
+Commit 연산은 한 개의 트랜잭션에 대한 작업이 성공적으로 끝났고 데이터베이스가 일관된 상태에 있을 때 이 트랜잭션이 행한 갱신 연산이 완료된 것을 트랜잭션 관리자에게 알려주는 연산이다.
+
+### Rollback 연산
+Rollback 연산은 하나의 트랜잭션 처리가 비정상적으로 종료되어 데이터베이스의 일관성을 깨뜨렸을 때, 이 트랜잭션의 일부가 정상적으러 처리되었더라도 트랜잭션의 원자성을 보장하기 위해 이 트랜잭션이 행한 모든 연산을 취소(Undo)하는 연산이다.
+
+Rollback시에는 해당 트랜잭션은 재시작하거나 폐기한다.
+
+### 트랜잭션의 상태
+
+<p align="center"><img src="https://media.vlpt.us/images/issac/post/1e2e072c-01c0-405e-9bfc-1be6ce5f831d/image.png"></p>
+
+* **활성(Active)**
+  * 트랜잭션이 정상적으로 실행중인 상태
+* **실패(Failed)**
+  * 트랜잭션 실행에 오류가 발생하여 중단된 상태
+* **철회(Aborted)**
+  * 트랜잭션이 비정상적으로 종료되어 Rollback 연산ㅇ르 수행한 상태
+* **부분 완료(Partially Committed)**
+  * 트랜잭션의 마지막 연산까지 실행했지만, Commit 연산이 실행되기 직전의 상태
+* **완료(Committed)**
+  * 트랜잭션이 성공적으로 종료되어 Commit 연산을 실행한 후의 상태
+
 # 참고
 * https://mangkyu.tistory.com/96
 * [위키 - B+Tree](https://ko.wikipedia.org/wiki/B%2B_%ED%8A%B8%EB%A6%AC)
 * [위키 - 정규화](https://ko.wikipedia.org/wiki/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4_%EC%A0%95%EA%B7%9C%ED%99%94)
 * https://chokyuhwan.tistory.com/27
+* [트랜잭션의 상태](https://velog.io/@issac/DB-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-Transaction%EC%9D%98-ACID-%EC%86%8D%EC%84%B1%EA%B3%BC-%EB%B6%84%EC%82%B0%EC%8B%9C%EC%8A%A4%ED%85%9C-BASE-%EC%86%8D%EC%84%B1)
