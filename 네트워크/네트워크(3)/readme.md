@@ -154,7 +154,8 @@ REST API에 대한 더 자세한 내용은 밑의 링크를 참고
 ## 참고
 * http://tcpschool.com/webbasic/works
 * https://senticoding.tistory.com/87
-* [REST API가 뭔가요?](https://www.youtube.com/watch?v=OpoVuwxGRDI)
+* [쿠키, 세션, 캐시가 뭔가요?](https://www.youtube.com/watch?v=OpoVuwxGRDI)
+* [REST API가 뭔가요?](https://www.youtube.com/watch?v=iOueE9AXDQQ)
 * [그런 REST API로 괜찮은가](https://www.youtube.com/watch?v=RP_f5dMoHFc)
 * https://sabarada.tistory.com/26
 * [REST 위키](https://ko.wikipedia.org/wiki/REST)
